@@ -1,0 +1,3 @@
+javac -sourcepath ./src -d out src/Lesson1/Homework1/sample/Main.java
+java -classpath ./out Lesson1.Homework1.sample.Main
+javadoc -d docs -sourcepath ./src -cp ./out -subpackages Lesson1 -locale ru_RU -encoding utf-8 -docencoding cp1251
