@@ -8,6 +8,8 @@ public class Snake {
     private int direction;
     private Food food;
 
+    private Poison poison;
+
     public Snake(int x, int y, int length, int direction) {
         snake = new LinkedList<>();
         for (int i = 0; i < length; i++) {
@@ -16,8 +18,24 @@ public class Snake {
         this.direction = direction;
     }
 
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
     public int size() {
         return snake.size();
+    }
+
+    public Poison getPoison(){
+        return poison;
+    }
+
+    public void setPoison(Poison poison){
+        this.poison = poison;
     }
 
     public void setDirection(int direction) {
@@ -53,11 +71,11 @@ public class Snake {
                     y = 0;
                 break;
         }
-        /*if (isInSnake(x, y) ||           // if the snake crosses itself
+        if (isInSnake(x, y) ||           // if the snake crosses itself
                 poison.isPoison(x, y)) { // or if it eats poison
             GameSnake.gameOver = true;
             return;
-        }*/
+        }
         snake.addFirst(new Cell(x, y, GameSnake.CELL_SIZE, GameSnake.SNAKE_COLOR)); // new head of snake
         if (food.isFood(x, y)) {
             food.eat();
@@ -81,14 +99,6 @@ public class Snake {
         }
         return false;
     }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
-
-
 }
+
+

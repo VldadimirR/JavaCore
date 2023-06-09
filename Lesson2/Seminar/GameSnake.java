@@ -11,8 +11,8 @@ public class GameSnake extends JFrame {
     final static int CELL_SIZE = 20;           // size of cell in pix
     final static int CANVAS_WIDTH = 30;        // width in cells
     final static int CANVAS_HEIGHT = 25;       // height in cells
-    final static Color SNAKE_COLOR = Color.darkGray;
-    final static Color FOOD_COLOR = Color.green;
+    final static Color SNAKE_COLOR = Color.GREEN;
+    final static Color FOOD_COLOR = Color.white;
     final static Color POISON_COLOR = Color.red;
     final static int KEY_LEFT = 37;            // codes
     final static int KEY_UP = 38;              //   of
@@ -28,14 +28,14 @@ public class GameSnake extends JFrame {
     Canvas canvas;                   // canvas object for rendering (drawing)
     Snake snake;                     // declare a snake object
     Food food;                       // declare a food object
-    //Poison poison;                   // declare a poison object
+    Poison poison;                   // declare a poison object
 
     public GameSnake (){
         setTitle(TITLE_OF_PROGRAM);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         canvas = new Canvas();
-        canvas.setBackground(Color.WHITE);
+        canvas.setBackground(Color.black);
         canvas.setPreferredSize(new Dimension(CELL_SIZE * CANVAS_WIDTH,CELL_SIZE * CANVAS_WIDTH));
 
         addKeyListener(new KeyAdapter() {
@@ -66,6 +66,10 @@ public class GameSnake extends JFrame {
         food = new Food(snake);
         snake.setFood(food);
 
+        poison = new Poison(snake);
+        poison.setFood(food);
+        snake.setPoison(poison);
+
         while (!gameOver){
             snake.move();
             if (snake.size() > snakeSize){
@@ -75,10 +79,12 @@ public class GameSnake extends JFrame {
 
             if (food.isEaten()){
                 food.appear();
+                poison.add();
             }
             canvas.repaint();
             sleep(SNAKE_DELAY);
         }
+        JOptionPane.showMessageDialog(this, GAME_OVER_MSG);
     }
 
 
@@ -99,8 +105,7 @@ public class GameSnake extends JFrame {
                     RenderingHints.VALUE_ANTIALIAS_ON);
             snake.paint(g2D);
             food.paint(g2D);
-            //poison.paint(g2D);
+            poison.paint(g2D);
         }
     }
-
 }

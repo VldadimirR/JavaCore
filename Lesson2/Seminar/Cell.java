@@ -44,7 +44,7 @@ public class Cell {
 
     public void paint(Graphics2D g) {           // object rendering
         g.setColor(color);
-        g.fillOval(x * size, y * size,        // upper left corner
+        g.fillRect(x * size, y * size,        // upper left corner
                 size, size);                  // width and height
     }
 }
