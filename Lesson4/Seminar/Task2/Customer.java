@@ -65,5 +65,6 @@ public class Customer {
     }
 
 }
+
 enum Gender {MEN, WOMAN}
 

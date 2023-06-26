@@ -62,7 +62,7 @@ public class Order {
     }
 
     public void assignDiscount(Product product) throws TooMuchSaleException {
-        discount = Discount.randomDirection();
+        discount = Discount.randomDiscount();
         float discountPrice;
         if (product.getCategory() == Category.VIP & discount.getNumVal() >= 0.15 ){
             throw new  TooMuchSaleException("Discount for VIP no more than 15% ");
@@ -90,7 +90,7 @@ enum Discount {
         return numVal;
     }
 
-    public static Discount randomDirection() {
+    public static Discount randomDiscount() {
         Discount[] directions = values();
         return directions[PRNG.nextInt(directions.length)];
     }
