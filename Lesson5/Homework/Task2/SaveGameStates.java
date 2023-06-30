@@ -10,6 +10,8 @@ public class SaveGameStates {
             File file = new File("src/Lesson5/Homework/Task2/save");
             writeBytes(out, file);
             readBytes(file);
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
         } catch (IOException e) {
             System.out.println("Error input/output");
         } catch (Exception e) {
@@ -19,21 +21,21 @@ public class SaveGameStates {
     }
 
     public static ByteArrayOutputStream recordingState(int field) throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream(3);
-        String temp = Integer.toString(field);
-        int[] newGuess = new int[temp.length()];
-        for (int i = 0; i < temp.length(); i++) {
-            newGuess[i] = temp.charAt(i) - '0';
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream(3)){
+            String temp = Integer.toString(field);
+            int[] newGuess = new int[temp.length()];
+            for (int i = 0; i < temp.length(); i++) {
+                newGuess[i] = temp.charAt(i) - '0';
+            }
+            int valueFieldOne = Integer.parseInt("" + newGuess[0] + newGuess[1] + newGuess[2]);
+            int valueFieldTwo = Integer.parseInt("" + newGuess[3] + newGuess[4] + newGuess[5]);
+            int valueFieldThree = Integer.parseInt("" + newGuess[6] + newGuess[7] + newGuess[8]);
+
+            out.write(valueFieldOne);
+            out.write(valueFieldTwo);
+            out.write(valueFieldThree);
+            return out;
         }
-        int valueFieldOne = Integer.parseInt("" + newGuess[0] + newGuess[1] + newGuess[2]);
-        int valueFieldTwo = Integer.parseInt("" + newGuess[3] + newGuess[4] + newGuess[5]);
-        int valueFieldThree = Integer.parseInt("" + newGuess[6] + newGuess[7] + newGuess[8]);
-
-        out.write(valueFieldOne);
-        out.write(valueFieldTwo);
-        out.write(valueFieldThree);
-
-        return out;
     }
 
 
